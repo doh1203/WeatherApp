@@ -1,12 +1,7 @@
 package com.example.doh12.weatherapp;
 
-
 import android.support.annotation.NonNull;
-
 import android.support.v7.app.AppCompatActivity;
-
-
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,18 +22,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends AppCompatActivity implements
-        View.OnClickListener {
+public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "EmailPassword";
 
     private EditText mEmailField;
     private EditText mPasswordField;
 
-    // [START declare_auth]
     private FirebaseAuth mAuth;
-    // [END declare_auth]
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,51 +48,15 @@ public class LoginActivity extends AppCompatActivity implements
                 signIn(email, password);
             }
         });
-//        findViewById(R.id.email_register_button).setOnClickListener(this);
-
-        // [START initialize_auth]
-        // Initialize Firebase Auth
+        Button mRegisterButton = (Button) findViewById(R.id.email_register_button);
+        mRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                LoginActivity.this.startActivity(registerIntent);
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
-    }
-
-    // [START on_start_check_user]
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-    }
-    // [END on_start_check_user]
-
-    private void createAccount(String email, String password) {
-        Log.d(TAG, "createAccount:" + email);
-        if (!validateForm()) {
-            return;
-        }
-
-
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                        // [START_EXCLUDE]
-                        // [END_EXCLUDE]
-                    }
-                });
-        // [END create_user_with_email]
     }
 
     private void signIn(String email, String password) {
@@ -148,12 +103,8 @@ public class LoginActivity extends AppCompatActivity implements
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-
-                        // [START_EXCLUDE]
-                        // [END_EXCLUDE]
                     }
                 });
-        // [END sign_in_with_email]
     }
 
     private boolean validateForm() {
@@ -176,17 +127,6 @@ public class LoginActivity extends AppCompatActivity implements
         }
 
         return valid;
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.email_register_button) {
-            createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        } else if (i == R.id.email_sign_in_button) {
-            signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        }
     }
 }
 
