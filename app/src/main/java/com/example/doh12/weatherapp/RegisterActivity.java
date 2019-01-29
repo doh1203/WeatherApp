@@ -1,6 +1,7 @@
 package com.example.doh12.weatherapp;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -146,6 +147,8 @@ public class RegisterActivity extends AppCompatActivity {
         emailRef.child("lon").setValue(lonDouble);
         emailRef.child("name").setValue(mNameView.getText().toString());
         emailRef.child("email").setValue(email);
+        Intent loginActivity = new Intent(this, LoginActivity.class);
+        this.startActivity(loginActivity);
     }
 
     @Override

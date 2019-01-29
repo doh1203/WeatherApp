@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                             ref.child(e).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot snapshot) {
-                                    String ak = (String) snapshot.child("apikey").getValue();
+                                    String ak = (String) snapshot.child("apiKey").getValue();
                                     String name = (String) snapshot.child("name").getValue();
                                     String email = (String) snapshot.child("email").getValue();
                                     double lat = (double) snapshot.child("lat").getValue();
