@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -118,6 +119,10 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         String password = mPasswordView.getText().toString();
+        if (password == null || password.length() < 6) {
+            Log.d("Register", "Password not provided or does not meet specification.");
+            return;
+        }
         // Register the user in firebaseauth
         mAuth.createUserWithEmailAndPassword(email, password);
         if (password == null || password == "") {

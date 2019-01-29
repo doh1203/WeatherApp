@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordField = findViewById(R.id.password);
 
         // Buttons
-        ((Button)(findViewById(R.id.email_sign_in_button))).setOnClickListener(new View.OnClickListener() {
+        ((Button) (findViewById(R.id.email_sign_in_button))).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = mEmailField.getText().toString();
@@ -85,11 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                     String email = (String) snapshot.child("email").getValue();
                                     double lat = (double) snapshot.child("lat").getValue();
                                     double lon = (double) snapshot.child("lon").getValue();
-                                    System.out.println(ak);
-                                    System.out.println(name);
-                                    System.out.println(email);
-                                    System.out.println(lat);
-                                    System.out.println(lon);
+                                    startGetWeatherActivity(ak, name, email, lat, lon);
                                 }
 
                                 @Override
@@ -105,6 +101,16 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void startGetWeatherActivity(String apiKey, String name, String email, double lat, double lon) {
+        Intent getWeatherIntent = new Intent(LoginActivity.this, GetWeatherActivity.class);
+        getWeatherIntent.putExtra("apiKey", apiKey);
+        getWeatherIntent.putExtra("name", name);
+        getWeatherIntent.putExtra("email", email);
+        getWeatherIntent.putExtra("lat", lat);
+        getWeatherIntent.putExtra("lon", lon);
+        LoginActivity.this.startActivity(getWeatherIntent);
     }
 
     private boolean validateForm() {
