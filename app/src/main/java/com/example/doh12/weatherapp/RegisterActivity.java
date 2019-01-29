@@ -18,6 +18,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by Dennis Li on 1/27/2019.
@@ -29,10 +32,12 @@ public class RegisterActivity extends AppCompatActivity {
     int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
 
     // UI references.
+    private EditText mEmailView;
+    private EditText mPasswordView;
     private EditText mNameView;
     private EditText mLatitudeView;
     private EditText mLongitudeView;
-    private View mRegisterFormView;
+    private EditText mApiKeyView;
     // For GPS
     private FusedLocationProviderClient mFusedLocationClient;
 
@@ -42,9 +47,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         // Set up the register form.
+        mEmailView = findViewById(R.id.email);
+        mPasswordView = findViewById(R.id.password);
         mNameView =  findViewById(R.id.name);
         mLatitudeView = findViewById(R.id.coordinate_x);
         mLongitudeView = findViewById(R.id.coordinate_y);
+        mApiKeyView = findViewById(R.id.api_key);
 
         Button mFindCoordinatesButton = findViewById(R.id.find_coordinates_button);
         mFindCoordinatesButton.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        mRegisterFormView = findViewById(R.id.register_form);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
@@ -104,7 +111,36 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void attemptRegister() {
-
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String email = mEmailView.getText().toString();
+        if (email == null || email == "") {
+            Log.d("Register", "Email not provided.");
+            return;
+        }
+        String password = mPasswordView.getText().toString();
+        // Register the user in firebaseauth
+        mAuth.createUserWithEmailAndPassword(email, password);
+        if (password == null || password == "") {
+            Log.d("Register", "Email not provided.");
+            return;
+        }
+        String lat = mLatitudeView.getText().toString();
+        double latDouble = 0;
+        if (lat != null && lat != "") {
+            latDouble = Double.parseDouble(lat);
+        }
+        String lon = mLongitudeView.getText().toString();
+        double lonDouble = 0;
+        if (lat != null && lat != "") {
+            lonDouble = Double.parseDouble(lon);
+        }
+        DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference emailRef = dataRef.child(email.split("@")[0]);
+        emailRef.child("apiKey").setValue(mApiKeyView.getText().toString());
+        emailRef.child("lat").setValue(latDouble);
+        emailRef.child("lon").setValue(lonDouble);
+        emailRef.child("name").setValue(mNameView.getText().toString());
+        emailRef.child("email").setValue(email);
     }
 
     @Override

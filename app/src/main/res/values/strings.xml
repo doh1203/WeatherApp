@@ -15,8 +15,15 @@
     </string>
     <!-- Strings related to registration -->
     <string name="action_find_coordinates">Find Coordinates</string>
+    <string name="register_activity_email">Email</string>
+    <string name="register_activity_email_hint">Enter your Email Here...</string>
+    <string name="register_activity_password">Password</string>
+    <string name="register_activity_password_hint">Enter your Password Here...</string>
     <string name="register_activity_name">Name</string>
     <string name="register_activity_name_hint">Enter your name here...</string>
     <string name="register_activity_coordinate_x">Latitude</string>
     <string name="register_activity_coordinate_y">Longitude</string>
+    <string name="register_activity_api_key">OpenWeatherMap API Key</string>
+    <!-- Strings related to get weather -->
+    <string name="action_sign_out">Sign Out</string>
 </resources>

@@ -30,6 +30,10 @@
             android:name=".RegisterActivity"
             android:label="@string/action_register">
         </activity>
+        <activity
+            android:name=".GetWeatherActivity"
+            android:label="GetWeather">
+        </activity>
     </application>
 
 </manifest>

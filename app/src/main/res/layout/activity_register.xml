@@ -35,6 +35,42 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/register_activity_email_hint"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/register_activity_email"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/register_activity_password_hint"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/register_activity_password"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,6 +115,24 @@
                     android:imeActionLabel="@string/register_activity_coordinate_y"
                     android:imeOptions="actionUnspecified"
                     android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/api_key"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/register_activity_api_key"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/register_activity_api_key"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
 
