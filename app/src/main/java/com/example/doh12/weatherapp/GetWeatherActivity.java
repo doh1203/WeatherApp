@@ -67,7 +67,7 @@ public class GetWeatherActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Log.d("NetworkingThread", "Callable Error: " + e + ": " + e.getMessage());
             }
-            if (dataStr != "") {
+            if (dataStr != null && dataStr != "") {
                 try {
                     JSONObject dataObj = new JSONObject(dataStr);
                     // Set the location textview
